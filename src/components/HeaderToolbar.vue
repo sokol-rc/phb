@@ -35,16 +35,17 @@
           </v-list>
         </v-menu>
 
-        <v-btn icon>
+        <v-btn icon @click.stop="() => emit('openFilters')">
           <v-icon>mdi-dots-vertical</v-icon>
         </v-btn>
+        
       </v-toolbar>
   </v-card>
 </template>
 <script setup lang="ts">
 import {ref} from "vue";
 
-const emit = defineEmits(['sortByLevel', 'sortByName', 'openDrawer'])
+const emit = defineEmits(['sortByLevel', 'sortByName', 'openDrawer', 'openFilters'])
 const {
   label,
 } = defineProps<{label: string | null}>()

@@ -24,6 +24,7 @@
       @sort-by-level="onSortByLevel"
       @sort-by-name="onSortByName"
       @open-drawer="onOpenDrawer"
+      @open-filters="filterSidebarVisible = true"
   />
   <v-layout>
     <v-navigation-drawer
@@ -44,6 +45,7 @@
         ></v-list-item>
       </v-list>
     </v-navigation-drawer>
+    <filter-sidebar v-model:visible="filterSidebarVisible"></filter-sidebar>
   </v-layout>
   <main-spell-list></main-spell-list>
   <v-snackbar
@@ -74,18 +76,14 @@ async function close() {
 
 import {useSpellListStore} from "@/store/spellListStore"
 import {onMounted, ref} from "vue";
+import FilterSidebar from "@/views/filterSidebar/FilterSidebar.vue";
 
 const spellListStore = useSpellListStore()
 
 const drawer = ref(false)
+const filterSidebarVisible = ref(false)
 const currentLabel = ref<string | null>(null)
 
-/*const drawerMenu = [
-  {
-    title: 'Бард',
-    onClick: () => openSavedCollection(),
-  },
-]*/
 
 onMounted(() => {
   spellListStore.initSpellList()
@@ -139,6 +137,7 @@ const closeDrawer = () => drawer.value = false
 const onOpenDrawer = () => {
   openDrawer()
 }
+
 </script>
 
 <style>
